@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.huarun.dao.CourseMapper">
+    <select id="queryAllCourse" resultType="CourseDO">
+        select * from course
+    </select>
+
+    <select id="queryCourseByID" resultType="CourseDO">
+        select * from course where course_id = #{id}
+    </select>
+
+    <insert id="addOneCourse" useGeneratedKeys="true" keyProperty="course_id">
+            insert into course(course_name,course_times,course_credit,course_start,course_end)
+            values (#{courseDO.course_name},#{courseDO.course_times},
+                    #{courseDO.course_credit},#{courseDO.course_start},
+                    #{courseDO.course_end})
+    </insert>
+
+    <delete id="deleteOneCourse">
+        delete from course
+        where course_id = #{course_id}
+    </delete>
+
+    <update id="updateOneCourse">
+        update course
+        set course_name=#{courseDO.course_name},course_times=#{courseDO.course_times},
+            course_credit=#{courseDO.course_credit},course_start=#{courseDO.course_start},
+            course_end=#{courseDO.course_end}
+            where course_id = #{courseDO.course_id}
+    </update>
+
+</mapper>

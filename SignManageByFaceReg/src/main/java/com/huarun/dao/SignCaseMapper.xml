@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.huarun.dao.SignCaseMapper">
+    <select id="getSignCaseByUserIDAndCourseID" resultType="SignCase">
+        select * from sm_sign_case where
+        course_id = #{course_id} and student_id = #{student_id}
+    </select>
+
+    <!--    <insert id="setSignCaseByUserIDAndCourseID">-->
+    <!--        insert into SignManage.sm_sign_case(course_id,student_id,sign_case_bitmap)-->
+    <!--        values  (#{course_id},#{student_id},#{sign_case_bitmap});-->
+    <!--    </insert>-->
+
+    <update id="updateSignCaseByUserIDAndCourseID">
+        update sm_sign_case set sign_case_bitmap = #{sign_case_bitmap}
+        where course_id = #{course_id} and  student_id = #{student_id}
+    </update>
+
+    <insert id="initSignCaseOneStudentOneCourse">
+        insert into sm_sign_case(course_id,student_id)
+        values  (#{course_id},#{student_id});
+    </insert>
+
+    <delete id="deleteSignCaseOneStudentOneCourse">
+        delete from sm_sign_case where
+        course_id = #{course_id} and student_id = #{student_id}
+    </delete>
+
+    <delete id="deleteOneCourse">
+        delete from sm_sign_case where
+        course_id = #{course_id}
+    </delete>
+
+    <delete id="deleteOneStudent">
+        delete from sm_sign_case where
+        student_id = #{userID}
+    </delete>
+
+</mapper>

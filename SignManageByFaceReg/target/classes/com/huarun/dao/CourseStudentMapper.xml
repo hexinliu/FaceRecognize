@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.huarun.dao.CourseStudentMapper">
+
+    <select id="queryMyCourseIDByUserID" resultType="CourseStudent">
+        select * from course_student where student_id = #{userID}
+    </select>
+
+    <select id="queryOneCourseAllStudent" resultType="CourseStudent">
+        select * from course_student where course_id = #{course_id}
+    </select>
+
+    <delete id="delOneStudentInCourse">
+        delete from course_student
+        where course_id = #{course_id} and student_id = #{student_id}
+    </delete>
+
+    <delete id="deleteOneCourse">
+          delete from course_student
+          where course_id = #{course_id}
+    </delete>
+
+    <delete id="deleteOneStudent">
+          delete from course_student
+          where student_id = #{userID}
+    </delete>
+
+    <insert id="addOneStudentInCourse">
+         insert into course_student(student_id,course_id)
+         values(#{student_id},#{course_id})
+    </insert>
+
+    <insert id="insertBatch">
+        insert into course_student(student_id,course_id)
+        values
+        <foreach collection="params.availableList" item="stuIDpojo" separator=",">
+            (#{stuIDpojo.id},#{params.course_id})
+        </foreach>
+    </insert>
+</mapper>
